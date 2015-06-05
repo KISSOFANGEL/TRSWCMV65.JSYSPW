@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+body {background:url(yyjd05_20150528.jpg); font-size:14px; color:#343233;}
+.red {color:#F00;}
+
+
+.top {width:1044px; height:53px; margin:0 auto; margin-top:30px;}
+.main {width:1002px; margin:0 auto; background:#ffffff; overflow:hidden; padding-bottom:6px;}
+.main_title {height:79px; margin-top:4px;}
+.main_con {width:989px; margin:0 auto;}
+.main_con_top {height:17px;}
+.mian_con_con {background:url(yyjd06_20150528.jpg) repeat-y;}
+.mian_con_con .works {width:940px; height:40px; margin:0 auto; line-height:40px; font-family:"微软雅黑"; font-weight:bold; background:url(yyjd07_20150528.jpg);}
+.mian_con_con .works p {padding-left:18px; font-size:14px;}
+.menu1 {height:100px; margin-left:92px; position:relative;}
+.menu1 .name {position:absolute; top:82px; left:0px;}
+.menu1 .name span {padding-right:8px;}
+.menu1 .picture {width:98px; height:98px; border:1px solid #d4d4d4; position:absolute; left:97px; top:0px;}
+.menu1 .browse {width:78px; height:40px; background:#a1532d; position:absolute; left:209px; top:59px; line-height:40px; text-align:center;}
+.menu1 .browse p {color:#ffffff; font-weight:bold;}
+.menu2 {margin-top:20px; margin-left:92px;}
+.menu2 span {padding-right:8px;}
+.menu2 .apply_company {width:298px; height:38px; border:1px solid #d4d4d4; margin-left:13px; line-height:38px;}
+.ml121 {margin-left:121px;}
+.menu2 .apply_company_xz1 {width:126px; height:38px; border:1px solid #d4d4d4; margin-left:5px; line-height:38px;}
+.ml136 {margin-left:136px;}
+.menu2 .apply_company_xz2 {width:95px; height:38px; border:1px solid #d4d4d4; margin-left:5px; line-height:38px; text-align:center; }
+.ml107 {margin-left:107px;}
+.menu2 .apply_company2 {width:134px; height:38px; border:1px solid #d4d4d4; margin-left:7px; margin-right:7px; line-height:38px;}
+.ml97 {margin-left:97px;}
+.mian_con_con .works2 {width:940px; height:40px; margin:0 auto; line-height:40px;  background:url(yyjd07_20150528.jpg); margin-top:50px;}
+.mian_con_con .works2 p strong {font-family:"微软雅黑"; font-weight:bold; font-size:14px;}
+.mian_con_con .works2 p {padding-left:18px; font-size:12px;}
+.menu2 .apply_company_yx1 {width:168px; height:38px; border:1px solid #d4d4d4; margin-left:13px; margin-right:10px; line-height:38px;}
+.menu2 .apply_company_yx2 {width:102px; height:38px; border:1px solid #d4d4d4; margin-left:10px; line-height:38px;}
+.menu3 {margin-top:32px; margin-left:197px; width:604px;}
+.menu3 ul li {float:left;width:302px;height:62px;}
+.coolbg{width:302px;height:62px;border:0; background:url(determine_20150528.jpg) no-repeat;font-family:"microsoft yahei";font-size:18px; line-height:38px;}
+.reset{background:#ffffff;border:0; font-size:14px; color:#7c5931; padding-top:44px; margin-left:32px; display:block;}
+.mian_con_bottom {height:23px;}
+
+.footer {width:1010px; margin:0 auto; margin-top:28px;}
+.footer p {text-align:center; line-height:30px;}
+.footer p span {color:#F00;}
+.textarea{ width:298px;border:1px solid #d4d4d4; margin-left:13px; margin-right:10px;}
+.coolbg{ cursor: pointer;}
+.reset{ cursor: pointer;}
+.menu2 .span{width:100px; float:left}
+.menu2 .red{ float:left}

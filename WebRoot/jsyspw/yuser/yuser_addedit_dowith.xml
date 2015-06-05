@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="gb2312"?>
+<parameters>	
+	<parameter name="YUserId"  desc="YUserID"  min-value="0" type="int" required="false" default="0"/>
+	<parameter name="ObjectXML"  desc="YUser属性" type="string" required="true"/>
+</parameters>

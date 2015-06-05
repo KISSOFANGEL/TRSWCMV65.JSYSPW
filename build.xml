@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="V65" basedir=".">
+
+	<property file="build.properties" />
+
+	<property name="context.dir" value="${root.dir}/TRSWCMV65.JSYSPW/WebRoot" />
+	<property name="tomcat.webapps.dir" value="${tomcat.dir}/webapps" />
+	<property name="application.dir" value="${tomcat.webapps.dir}/${application}" />
+
+
+	<!--更新WCMV7应用-->
+	<target name="updateV6" >
+		<echo>Dest Dir:${application.dir}</echo>
+		<echo>Src Dir:${context.dir}</echo>
+		<mkdir dir="${application.dir}" />
+
+		<copy todir="${application.dir}">
+			<fileset dir="${context.dir}">
+				<exclude name="WEB-INF/classes/config.xml" />
+				<exclude name="WEB-INF/web.xml" />
+				<exclude name="WEB-INF/classes/license/LICENSE.trswcm" />
+				<exclude name="WEB-INF/lib/**/*" />
+				<exclude name="include" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="updateV6temp">
+		<property name="updateroot.dir" value="G:\myeclipse\V6update" />
+		<tstamp />
+		<echo>Dest Dir:${updateroot.dir}\${DSTAMP}_3\wcm</echo>
+		<echo>Src Dir:${context.dir}</echo>
+		<mkdir dir="${updateroot.dir}\${DSTAMP}_02\wcm" />
+
+		<copy todir="${updateroot.dir}\${DSTAMP}_02\wcm" includeEmptyDirs="false">
+			<fileset dir="${context.dir}">
+				<and>
+					<date when="after" datetime="10/14/2013 9:00 aM" />
+				</and>
+				<exclude name="WEB-INF/classes/config.xml" />
+				<exclude name="ghinclude/gh_config.jsp" />
+				<exclude name="WEB-INF/web.xml" />
+				<exclude name="WEB-INF/classes/license/LICENSE.trswcm" />
+				<exclude name="WEB-INF/lib/**/*" />
+			</fileset>
+		</copy>
+	</target>
+</project>
+

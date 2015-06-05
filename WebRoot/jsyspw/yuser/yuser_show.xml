@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="gb2312"?>
+<parameters>	
+	<parameter name="YUserId"  desc="YUserID"  min-value="1" type="int" required="true" default="0"/>
+</parameters>

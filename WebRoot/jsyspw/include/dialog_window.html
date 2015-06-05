@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>TRS WCM Dialog Window ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+function init(){
+	var arArgs = window.dialogArguments;
+	if(!arArgs || !arArgs[0] || !arArgs[1]){
+		alert("传入无效的参数对象，对话框初始化失败！");
+		window.close();
+		return;
+	}
+	var sUrl = arArgs[0];
+	if(sUrl.indexOf("../") < 0){
+		var sParentUrl = arArgs[1];
+		var nPos = sParentUrl.lastIndexOf("/");
+		var sPreFix = sParentUrl.substring(0, nPos+1);
+		sUrl = sPreFix + sUrl;
+	}
+
+
+	var subWin = document.getElementById("subWindow").contentWindow;
+	subWin.location.href = sUrl;
+}
+
+function getDialogArguments(){
+	var arArgs = window.dialogArguments;
+	try{
+		return arArgs[2];
+	} catch(e) {return null;}
+}
+</SCRIPT>
+</HEAD>
+
+<BODY style="margin:0px;padding:0px;overflow:hidden">
+<IFRAME name="subWindow" id="subWindow" src="about:blank" frameborder="NO" border="0" framespacing="0" width="100%" height="100%" Scrolling="no"></IFRAME>
+</BODY>
+</HTML>
+<SCRIPT LANGUAGE="JavaScript">
+	init();
+</SCRIPT>

@@ -1,0 +1,318 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<!-- wenyh@20091016 cluster session filter configure. -->
+
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>ClusterSessionFilter</filter-name>
+		<filter-class>com.trs.infra.ClusterSessionFileter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ClusterSessionFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ClusterSessionFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>ClusterProxyFilter</filter-name>
+		<filter-class>com.trs.cluster.ext.wcm.ClusterProxyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ClusterProxyFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ClusterProxyFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>LoginCheckFilter</filter-name>
+		<filter-class>com.trs.servlet.LoginCheckFilter</filter-class>
+		<init-param>
+			<param-name>notFilterJsp</param-name>
+			<param-value>
+				login.jsp,login_dowith.jsp,loginpage.jsp,reg_newuser.jsp,reg_newuser_dowith.jsp,user_exist.jsp,license_edit.jsp,license_edit_dowith.jsp,govcenter.do,govfileuploader.do,infoview.do
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redictPage</param-name>
+			<param-value>
+				include/not_login.htm
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>notFilterJspWithPath</param-name>
+			<param-value>
+			<!--example : app/login.jsp-->
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>notFilterPath</param-name>
+			<param-value>
+				WCMV6/gkml/sqgk,app/interview,app/special/design_for_interview.jsp
+			</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<!-- Discovery init BEGIN -->
+	<context-param>
+		<param-name>DiscoveryIncludeLibrary</param-name>
+		<param-value>trs*.jar,trs*.zip</param-value>
+	</context-param>
+	<context-param>
+		<param-name>DiscoveryExcludeLibrary</param-name>
+		<param-value>log4j*.jar</param-value>
+	</context-param>
+	<context-param>
+		<param-name>DiscoveryIncludeDirectory</param-name>
+		<param-value>TRSConfig,hbm,classes</param-value>
+	</context-param>
+	<context-param>
+		<param-name>DiscoveryExcludeDirectory</param-name>
+		<param-value>test*</param-value>
+	</context-param>
+	<listener>
+		<listener-class>com.trs.infra.discover.util.DiscoveryStartupListener</listener-class>
+	</listener>
+	<!-- Discovery init END -->
+
+	<context-param>
+		<param-name>locale</param-name>
+		<param-value>cn</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.apache.axis.transport.http.AxisHTTPSessionListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.trs.infra.I18NMessageStartUp</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>Startup</servlet-name>
+		<servlet-class>com.trs.infra.StartupServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<!-- jni -->
+	<servlet>
+		<servlet-name>jni</servlet-name>
+		<servlet-class>com.trs.jni.servlet.JNIDeployServlet</servlet-class>
+		<init-param>
+			<param-name>trscrypt</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>javabean</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>controller</servlet-name>
+		<servlet-class>com.trs.webframework.controler.servlet.ServiceControler</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>controller</servlet-name>
+		<url-pattern>/center.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AxisServlet</servlet-name>
+		<servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+	</servlet>
+
+	<!--verify-code servlet begin -->
+	<servlet>
+		<servlet-name>VerifyCodeServlet</servlet-name>
+		<servlet-class>com.trs.weblet.util.verfiycode.VerifyCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VerifyCodeServlet</servlet-name>
+		<url-pattern>/verifycode</url-pattern>
+	</servlet-mapping>
+	<!--verify-code servlet end -->
+
+	<servlet>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>SOAPMonitorService</servlet-name>
+		<servlet-class>org.apache.axis.monitor.SOAPMonitorService</servlet-class>
+		<init-param>
+			<param-name>SOAPMonitorPort</param-name>
+			<param-value>5001</param-value>
+		</init-param>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>infoview_controller</servlet-name>
+		<servlet-class>com.trs.components.infoview.filter.InfoviewDataImportFilter</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>infoview_controller</servlet-name>
+		<url-pattern>/infoview.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/servlet/AxisServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>*.jws</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>SOAPMonitorService</servlet-name>
+		<url-pattern>/SOAPMonitor</url-pattern>
+	</servlet-mapping>
+
+	<!-- DataExchange Begin -->
+	<servlet>
+		<servlet-name>govcontroller</servlet-name>
+		<servlet-class>com.trs.webframework.controler.servlet.NoLoginServiceControler</servlet-class>
+		<init-param>
+			<param-name>AllowIP</param-name>
+			<param-value>127.0.0.1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>CurrUser</param-name>
+			<param-value>admin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>RedirectURI</param-name>
+			<param-value>/center.do</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>govcontroller</servlet-name>
+		<url-pattern>/govcenter.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>fileuploader</servlet-name>
+		<servlet-class>com.trs.webframework.controler.servlet.FileUploader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fileuploader</servlet-name>
+		<url-pattern>/fileuploader.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>govfileuploader</servlet-name>
+		<servlet-class>com.trs.webframework.controler.servlet.NoLoginServiceControler</servlet-class>
+		<init-param>
+			<param-name>AllowIP</param-name>
+			<param-value>127.0.0.1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>CurrUser</param-name>
+			<param-value>admin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>RedirectURI</param-name>
+			<param-value>/fileuploader.do</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>govfileuploader</servlet-name>
+		<url-pattern>/govfileuploader.do</url-pattern>
+	</servlet-mapping>
+	<!-- DataExchange End -->
+
+	<!-- uncomment this if you want the admin servlet -->
+	<!-- <servlet-mapping> <servlet-name>AdminServlet</servlet-name> <url-pattern>/servlet/AdminServlet</url-pattern> 
+		</servlet-mapping> -->
+
+	<session-config>
+		<!-- Default to 5 minute session timeouts -->
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!-- currently the W3C havent settled on a media type for WSDL; http://www.w3.org/TR/2003/WD-wsdl12-20030303/#ietf-draft 
+		for now we go with the basic 'it's XML' response -->
+	<mime-mapping>
+		<extension>wsdl</extension>
+		<mime-type>text/xml</mime-type>
+	</mime-mapping>
+
+
+	<mime-mapping>
+		<extension>xsd</extension>
+		<mime-type>text/xml</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>htm</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>html</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>js</extension>
+		<mime-type>text/javascript</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>css</extension>
+		<mime-type>text/css</mime-type>
+	</mime-mapping>
+
+
+	<welcome-file-list id="WelcomeFileList_1049952382612">
+		<welcome-file>app/index.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/app/include/error.jsp</location>
+	</error-page>
+	<jsp-config>
+		<jsp-property-group>
+			<description> Special property group for JSP Configuration JSP 
+				example. </description>
+			<display-name>JSPConfiguration</display-name>
+			<url-pattern>*.jsp</url-pattern>
+			<el-ignored>true</el-ignored>
+			<page-encoding>GBK</page-encoding>
+			<scripting-invalid>false</scripting-invalid>
+		</jsp-property-group>
+	</jsp-config>
+</web-app>
