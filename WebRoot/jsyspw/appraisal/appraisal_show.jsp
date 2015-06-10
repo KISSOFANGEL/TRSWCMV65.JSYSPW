@@ -84,63 +84,60 @@ function closeWindow(){
 				<TD align="left" valign="top">
 				<TABLE width="100%" border="0" cellpadding="2" cellspacing="1"
 					bgcolor="A6A6A6">
-					
+					<tr bgcolor="#F6F6F6">
+					<td>艺术品图片</td>
+					<td><img width="160" height="160" src="/<%=PageViewUtil.toHtml(currAppraisal.getPicurl())%>"/></td>
+					</tr>
 					<TR bgcolor="#F6F6F6">
-						<TD>PRODUCTIONNAME</TD>
+						<TD>艺术品名称</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("PRODUCTIONNAME"))%></TD>
 					</TR>
 					
 
 					<TR bgcolor="#F6F6F6">
-						<TD>PRODUCTIONAUTHOR</TD>
+						<TD>艺术品作者</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("PRODUCTIONAUTHOR"))%></TD>
 					</TR>
 					
 
 					<TR bgcolor="#F6F6F6">
-						<TD>PRODUCTIONTYPE</TD>
+						<TD>艺术品类型</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("PRODUCTIONTYPE"))%></TD>
 					</TR>
 					
 
 					<TR bgcolor="#F6F6F6">
-						<TD>OWNER</TD>
+						<TD>所有人</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("OWNER"))%></TD>
 					</TR>
 					
 
 					<TR bgcolor="#F6F6F6">
-						<TD>APPENDIXID</TD>
-						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("APPENDIXID"))%></TD>
-					</TR>
-					
-
-					<TR bgcolor="#F6F6F6">
-						<TD>PRODUCTDATE</TD>
+						<TD>艺术品创作时期</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("PRODUCTDATE"))%></TD>
 					</TR>
 					
 
 					<TR bgcolor="#F6F6F6">
-						<TD>AGENT</TD>
+						<TD>送鉴人</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("AGENT"))%></TD>
 					</TR>
 					
 
 					<TR bgcolor="#F6F6F6">
-						<TD>INTRODUCTIO</TD>
+						<TD>艺术品简介</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("INTRODUCTIO"))%></TD>
 					</TR>
 					
 
 					<TR bgcolor="#F6F6F6">
-						<TD>REMARKS</TD>
+						<TD>备注</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("REMARKS"))%></TD>
 					</TR>
 					
 
 					<TR bgcolor="#F6F6F6">
-						<TD>AGENTTEL</TD>
+						<TD>送检人电话</TD>
 						<TD>&nbsp;<%=PageViewUtil.toHtml(currAppraisal.getPropertyAsString("AGENTTEL"))%></TD>
 					</TR>
 					

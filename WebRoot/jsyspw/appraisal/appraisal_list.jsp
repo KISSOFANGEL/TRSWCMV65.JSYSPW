@@ -77,12 +77,12 @@
 			<TR>
 				<TD width="24"><IMG src="../images/bite-blue-open.gif" width="24"
 					height="24"></TD>
-				<TD width="235">Appraisal列表</TD>
-				<TD class="navigation_channel_td"><A href="#"
+				<TD width="235">艺术品列表</TD>
+<!-- 				<TD class="navigation_channel_td"><A href="#"
 					class="navigation_channel_link">主页</A><SPAN
 					class="navigation_channel">&gt;</SPAN><A href="#"
 					class="navigation_channel_link">Appraisal列表</A></TD>
-				<TD width="28">&nbsp;</TD>
+				<TD width="28">&nbsp;</TD> -->
 			</TR>
 		</TABLE>
 		</TD>
@@ -157,6 +157,7 @@
 				<TABLE width="100%" border="0" cellpadding="0" cellspacing="1"
 					class="list_table">
 					<TR bgcolor="#BEE2FF" class="list_th">
+					<td>查看详情</td>
 						<TD width="40" height="20" NOWRAP><a
 							href="javascript:TRSHTMLElement.selectAllByName('AppraisalIds');">全选</a></TD>
 							<TD bgcolor="#BEE2FF">艺术品图片</TD>
@@ -202,9 +203,9 @@
 					<TR class="list_tr" onclick="TRSHTMLTr.onSelectedTR(this);">
 						<TD width="40" NOWRAP><INPUT TYPE="checkbox" NAME="AppraisalIds"
 							VALUE="<%=currAppraisal.getId()%>"><%=i%></TD>
-						<%-- <TD align=center><A target="_blank"
+						 <TD align=center><A target="_blank"
 							href="appraisal_show.jsp?AppraisalId=<%=currAppraisal.getId()%>">查看</A></TD>
-						 --%>
+						
 						 <td><img width="80" height="80" src="/<%=PageViewUtil.toHtml(currAppraisal.getPicurl())%>"/></td>
 						<TD><%=PageViewUtil.toHtml(currAppraisal.getProductionname())%></TD>
 						

@@ -25,8 +25,11 @@
 
 <!--- 页面状态设定、登录校验、参数获取，都放在public_server.jsp中 --->
 <%@include file="../include/public_server_nologin.jsp"%>
+<%@include file="../include/checklogin.jsp"%>
 <%!boolean IS_DEBUG = false;%>
 <%
+	String username = currUser.getUsername();
+	
 //4.初始化(获取数据)
 	int nAppraisalId = currRequestHelper.getInt("AppraisalId", 0);
 	Appraisal currAppraisal = null;
@@ -60,6 +63,7 @@
 		if(session.getAttribute("picurl")!=null){
 	currAppraisal.setPicurl(session.getAttribute("picurl")+"");
 	}
+	currAppraisal.setAgent(username);
 	currAppraisal.save(loginUser);
 
 //7.结束

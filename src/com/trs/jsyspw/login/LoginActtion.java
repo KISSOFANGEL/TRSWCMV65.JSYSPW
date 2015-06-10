@@ -2,25 +2,27 @@ package com.trs.jsyspw.login;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.Action;
+import com.sun.star.beans.MethodConcept;
+import com.trs.ajaxservice.WCMDocumentHelper;
 import com.trs.infra.common.WCMException;
 import com.trs.infra.persistent.WCMFilter;
 import com.trs.jsyspw.YUsers;
+import com.trs.webframework.context.MethodContext;
+import com.trs.webframework.provider.ISelfDefinedServiceProvider;
 
-public class LoginActtion {
+public class LoginActtion implements ISelfDefinedServiceProvider  {
 	private Logger log = Logger.getLogger(LoginActtion.class);
-	private String param;
-	private String username;
-	private String password;
-
 	private Map responsejson;
 	
-	public String validateUserName() {
+	public String validateUserName(MethodContext context) {
 		try {
-			WCMFilter wf = new WCMFilter("", "username='" + param + "'", "",
+			String username = context.getValue("param");
+			WCMFilter wf = new WCMFilter("", "username='" + username + "'", "",
 					"count(1) cnt");
 			YUsers yusers = YUsers.openWCMObjs(null, wf);
 			Map<String, String> map = new HashMap<String, String>();
@@ -40,8 +42,10 @@ public class LoginActtion {
 		}
 
 	}
-	public String loginDowith() {
+	public String loginDowith(MethodContext context ) {
 		try {
+			String username = context.getValue("username");
+			String password = context.getValue("password");
 			if(username==null||"".equals(username)){log.error("用户名不能为空");return Action.ERROR;}
 			if(password==null||"".equals(password)){log.error("密码不允许为空");return Action.ERROR;}
 			WCMFilter wf = new WCMFilter("", "username='" + username + "' and password='"+password+"'", "",
@@ -76,24 +80,4 @@ public class LoginActtion {
 		this.responsejson = responsejson;
 	}
 
-	public String getParam() {
-		return param;
-	}
-
-	public void setParam(String param) {
-		this.param = param;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }

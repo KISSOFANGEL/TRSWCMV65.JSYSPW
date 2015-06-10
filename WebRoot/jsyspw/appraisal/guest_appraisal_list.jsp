@@ -1,3 +1,4 @@
+<%@page import="com.trs.jsyspw.YUser"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="GBK"
 	errorPage="../include/error.jsp"%>
 <!------- WCM IMPORTS BEGIN ------------>
@@ -9,16 +10,14 @@
 <%@ page import="com.trs.presentation.util.PageHelper"%>
 <%@ page import="com.trs.presentation.util.PageViewUtil"%>
 <%@include file="../include/public_server_nologin.jsp"%>
+<%@include file="../include/checklogin.jsp"%>
 <%
 //4.初始化（获取数据）
-	
 //5.权限校验
-
 //6.业务代码
 	String sSelectFields = "PRODUCTIONNAME,PRODUCTIONAUTHOR,PRODUCTIONTYPE,OWNER,PRODUCTDATE,AGENT,AGENTTEL,PICURL,CRTIME";
-	WCMFilter filter = new WCMFilter("", currRequestHelper.getWhereSQL(),
+	WCMFilter filter = new WCMFilter("", "AGENT='"+currUser.getUsername()+"'",
 	currRequestHelper.getOrderSQL(), sSelectFields);
-	
 	/**
 	  *TODO 改为以下方式
 	  *IChannelService currChannelService = (IChannelService)DreamFactory.createObjectById("IChannelService");
@@ -36,7 +35,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>系统消息</title>
+    <title>藏品列表</title>
       <link rel="stylesheet" href="../style/amazeui/css/amazeui.min.css"/>
  	 <link rel="stylesheet" href="../style/amazeui/assets/css/admin.css">
  	 <link rel="stylesheet" href="../style/jquery.paginate.css">

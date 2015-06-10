@@ -1,3 +1,4 @@
+<%@page import="com.trs.jsyspw.YUser"%>
 <%@ page import="java.util.ArrayList,java.util.List,java.util.Enumeration" %>
 <%-- ------- WCM IMPORTS BEGIN ---------- --%>
 <%@ page import="com.trs.cms.auth.domain.AuthServer" %>
@@ -22,5 +23,7 @@
 <%-- ------- WCM IMPORTS BEGIN ---------- --%>
 
 <%
-if(session.getAttribute("currusername")==null)response.sendRedirect("/wcm/jsyspw/login/login.jsp");
+YUser currUser = new YUser();
+if(session.getAttribute("currloginyuser")==null){response.sendRedirect("/wcm/jsyspw/login/login.jsp");}
+else{	 currUser = (YUser)session.getAttribute("currloginyuser");}
 %>

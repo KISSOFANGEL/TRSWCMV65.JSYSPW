@@ -38,7 +38,6 @@
         FilesMan	aFilesMan	= FilesMan.getFilesMan();
         String stempPath = aFilesMan.getPathConfigValue(FilesMan.FLAG_SYSTEMTEMP, FilesMan.PATH_LOCAL);     
         su.save(stempPath);  
-       
         File file = su.getFiles().getFile(0);
         if (file==null||file.isMissing()) return;
     	// 将文件另存到pub目录

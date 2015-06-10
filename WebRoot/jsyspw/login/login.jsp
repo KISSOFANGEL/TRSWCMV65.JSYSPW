@@ -14,11 +14,13 @@
     <link href="../style/sweet-alert.css" rel="stylesheet">
     <script src="../js/jquery-1.9.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/Validform_v5.3.2.js"></script>
     <script src="../js/sweet-alert.js"></script>
 <%@include file="../include/public_client_addedit_nologin.jsp"%>
   </head>
  <SCRIPT LANGUAGE="JavaScript">
 function submitForm(){
+	save();
 	var frmData = document.frmData;
 	WCMAction.doPost(frmData, document.frmAction);	
 }
@@ -36,6 +38,19 @@ function erralert(){
       confirmButtonText: 'Primary!'
     });
   }
+function save() { 
+	if ($("#remember").prop("checked")) { 
+			var username = $("#username").val(); 
+			var password = $("#password").val(); 
+			$.cookie("rmbUser", "true", { expires: 7 }); //存储一个带7天期限的cookie 
+			$.cookie("username", username, { expires: 7 }); 
+			$.cookie("password", password, { expires: 7 }); 
+		}else{ 
+			$.cookie("rmbUser", "false", { expire: -1 }); 
+			$.cookie("username", "", { expires: -1 }); 
+			$.cookie("password", "", { expires: -1 }); 
+		} 
+}
 </SCRIPT>
 <body>
 <FORM NAME="frmAction" ID="frmAction" METHOD=POST
@@ -90,7 +105,7 @@ function erralert(){
 								</form>
 								<form id="register-form" name="frmData" method="post" role="form" style="display: none;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="用户名" value="" datatype="s3-30" erromsg="用户名请控制在3-30个字！"nullmsg="请填写用户名！"ajaxurl="/wcm/jsyspw/login/validateUserName">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="用户名" value="" datatype="s3-30" erromsg="用户名请控制在3-30个字！"nullmsg="请填写用户名！"ajaxurl="validateusername.jsp">
 									</div>
 <!-- 									<div class="form-group">
 										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
@@ -137,10 +152,10 @@ $(function() {
 });
 
 </script>
- <script src="../js/Validform_v5.3.2.js" charset="UTF-8"></script>
- 
   <script>
   $(function(){
+
+	  
  	$("#register-form").Validform({
 		tiptype:3,
 		btnSubmit:"#register-submit",
@@ -154,23 +169,53 @@ $(function() {
  	$("#login-form").Validform({
 		tiptype:3,
 		btnSubmit:"#login-submit",
-		beforeSubmit:function(curform){
-		$.ajax({
-			type:"post",
-			url:"/wcm/jsyspw/login/loginDowith",
-			dataType:"json",
-			data:"username="+$("#loginusername").val()+"&password="+$("#loginpassword").val(),
-			success:function(data){
+		callback:function(form){
+			var check=true;
+			if(check){
+				$.ajax({
+					type:"post",
+					asnyc:false,
+					url:"login_dowith.jsp",
+					dataType:"json",
+					data:"username="+$("#loginusername").val()+"&password="+$("#loginpassword").val(),
+					success:function(data){
+					if(data.status==1){
+					location.href="../appraisal/guest_appraisal_list.jsp";
+					//erralert();
+					}
+					else{alert("用户名或密码错误！");}
+					}
+				});
+			}
 			
-			if(data.status==1){
-			location.href="../appraisal/appraisal_list.jsp";
-			//erralert();
-			}
-			else{alert("用户名或密码错误！");}
-			}
-		});
+			return false;
 		}
+/* 		callback:function(form){
+			$.ajax({
+				type:"post",
+				url:"login_dowith.jsp",
+				dataType:"json",
+				data:"username="+$("#loginusername").val()+"&password="+$("#loginpassword").val(),
+				success:function(data){
+				if(data.status==1){
+				location.href="../appraisal/guest_appraisal_list.jsp";
+				//erralert();
+				}
+				else{alert("用户名或密码错误！");}
+				}
+			});
+		} */
+		
+	
+		
 	});
+ 	
+	  //記住密碼
+	  if ($.cookie("rmbUser") == "true") {
+	        $("#remember").attr("checked", true);
+	        $("#loginusername").val($.cookie("username"));
+	        $("#loginpassword").val($.cookie("password"));
+	        }
   });
   
   
